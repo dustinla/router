@@ -1,23 +1,20 @@
-package main
+package handler
 
 import (
 	"encoding/json"
 	"net/http"
 )
 
-
-
 type Customer struct {
 	Name    string `json:"name"`
 	Address string `json:"address"`
-	Tel string `json:"tel"`
+	Tel     string `json:"tel"`
 }
-
 
 type Deliver struct {
 	Name    string `json:"name"`
 	Address string `json:"address"`
-	Tel string `json:"tel"`
+	Tel     string `json:"tel"`
 }
 
 var customers = []Customer{
@@ -45,15 +42,14 @@ var deliver = []Deliver{
 		Tel:     "B123123123",
 	},
 }
-func getAllCustomers(writer http.ResponseWriter, request *http.Request) {
+
+func GetAllCustomers(writer http.ResponseWriter, request *http.Request) {
 	if err := json.NewEncoder(writer).Encode(customers); err != nil {
 		panic(err)
 	}
 }
 
-func getAllDeliver(writer http.ResponseWriter, request *http.Request) {
-	 json.NewEncoder(writer).Encode(deliver);
+func GetAllDeliver(writer http.ResponseWriter, request *http.Request) {
+	json.NewEncoder(writer).Encode(deliver)
 
 }
-
-

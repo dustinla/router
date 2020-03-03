@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 )
 
@@ -44,12 +45,28 @@ var deliver = []Deliver{
 }
 
 func GetAllCustomers(writer http.ResponseWriter, request *http.Request) {
+
+	setHeader(writer)
 	if err := json.NewEncoder(writer).Encode(customers); err != nil {
 		panic(err)
 	}
 }
 
 func GetAllDeliver(writer http.ResponseWriter, request *http.Request) {
+	setHeader(writer)
 	json.NewEncoder(writer).Encode(deliver)
 
+}
+func GetDeliverShow(writer http.ResponseWriter, request *http.Request) {
+	setHeader(writer)
+	vars := mux.Vars(request)
+	id := vars["devId"]
+	println(id)
+	json.NewEncoder(writer).Encode(deliver)
+
+}
+
+func setHeader(writer http.ResponseWriter) {
+	writer.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	writer.WriteHeader(http.StatusOK)
 }

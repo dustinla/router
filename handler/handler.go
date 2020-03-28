@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"net/http"
+	"strconv"
 )
 
 type Customer struct {
@@ -44,6 +45,8 @@ var deliver = []Deliver{
 	},
 }
 
+var i = 0
+
 func GetAllCustomers(writer http.ResponseWriter, request *http.Request) {
 
 	setHeader(writer)
@@ -55,6 +58,8 @@ func GetAllCustomers(writer http.ResponseWriter, request *http.Request) {
 func GetAllDeliver(writer http.ResponseWriter, request *http.Request) {
 	setHeader(writer)
 	json.NewEncoder(writer).Encode(deliver)
+	i++
+	println("Anzahl an Requests : " + strconv.Itoa(i))
 
 }
 func GetDeliverShow(writer http.ResponseWriter, request *http.Request) {
